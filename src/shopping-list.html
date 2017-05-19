@@ -1,0 +1,15 @@
+<template>
+  <h1>${title}</h1>
+  <form>
+    <ul repeat.for="item of items">
+      <li>
+        <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
+        <span css="text-decoration: ${item.purchased ? 'line-through' : 'none'};">${item.name}</span>
+        <button type="button" click.trigger="removeItem(item)">X</button>
+      </li>
+    </ul>
+    <input type="text" value.bind="name" />
+    <button type="submit" type="submit" click.trigger="addItem(name)">Add</button>
+    <button type="button" click.trigger="clearPurchased()">Clear purchased</button>
+  </form>
+</template>
