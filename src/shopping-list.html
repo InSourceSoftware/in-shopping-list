@@ -4,11 +4,11 @@
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-9">
-      <form id="shopping-list" class="well">
+      <form id="shopping-list" class="form-inline well">
         <fieldset>
           <div class="from-group">
             <label class="sr-only" for="listName">List Name</label>
-            <input type="text" id="listName" class="form-control form-label" placeholder="List Name" value.bind="listName" blur.trigger="saveProperties()" />
+            <input type="text" id="listName" class="form-control form-input form-label" placeholder="List Name" value.bind="listName" blur.trigger="saveProperties()" />
           </div>
           <div class="form-group pull-right">
             <label class="sr-only">
@@ -29,14 +29,15 @@
           </div>
           <div repeat.for="item of items">
             <div class="form-group form-item-group">
-              <span class="btn-delete" show.bind="isEditing">
-                <button type="button" class="btn btn-xs btn-danger" click.trigger="removeItem(item)">
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-              </span>
               <label class="form-item">
+                <span class="btn-delete" if.bind="isEditing">
+                  <button type="button" class="btn btn-xs btn-danger" click.trigger="removeItem(item)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </button>
+                </span>
                 <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
-                <span class="${item.purchased ? 'purchased' : ''}">${item.name}</span>
+                <span class="${item.purchased ? 'purchased' : ''}" show.bind="!isEditing">${item.name}</span>
+                <input type="text" class="form-input ${item.purchased ? 'purchased' : ''}" placeholder="Item Name" value.bind="item.name" blur.trigger="saveItem(item)" if.bind="isEditing" />
               </label>
             </div>
           </div>
@@ -48,7 +49,7 @@
                 </button>
               </span>
               <label class="sr-only" for="name">Item</label>
-              <input type="text" id="name" class="form-control" placeholder="Item Name" value.bind="name" />
+              <input type="text" id="name" class="form-control form-input" placeholder="Item Name" value.bind="name" />
             </div>
           </div>
         </fieldset>

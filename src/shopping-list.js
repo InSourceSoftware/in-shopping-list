@@ -26,6 +26,16 @@ export class ShoppingList {
     }
   }
 
+  selectItem(item) {
+    this.selected = item;
+    item.selected = true;
+  }
+
+  saveItem(item) {
+    item.selected = false;
+    this.saveItems();
+  }
+
   clearAll() {
     this.items = [];
     this.saveItems();
