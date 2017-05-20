@@ -1,15 +1,34 @@
 <template>
-  <h1>${title}</h1>
-  <form>
-    <ul repeat.for="item of items">
-      <li>
-        <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
-        <span css="text-decoration: ${item.purchased ? 'line-through' : 'none'};">${item.name}</span>
-        <button type="button" click.trigger="removeItem(item)">X</button>
-      </li>
-    </ul>
-    <input type="text" value.bind="name" />
-    <button type="submit" click.trigger="addItem(name)">Add</button>
-    <button type="button" click.trigger="clearPurchased()">Clear purchased</button>
-  </form>
+  <div class="page-header">
+    <h1>${title}</h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form id="shopping-list">
+        <div class="well">
+          <div repeat.for="item of items">
+            <div class="form-group">
+              <button type="button" class="btn btn-xs btn-danger btn-delete" click.trigger="removeItem(item)">X</button>
+              <label>
+                <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
+                <span class="${item.purchased ? 'done' : ''}">${item.name}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="well">
+          <div class="form-inline">
+            <div class="form-group">
+              <label class="sr-only" for="name">Item</label>
+              <input type="text" id="name" class="form-control" placeholder="Item Name" value.bind="name" />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" click.trigger="addItem(name)">Add</button>
+              <button type="button" class="btn btn-default" click.trigger="clearPurchased()">Clear Purchased</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
