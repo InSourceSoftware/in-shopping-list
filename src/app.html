@@ -6,6 +6,20 @@
     <div class="page-header">
       <h1>${title}</h1>
     </div>
-    <shopping-list></shopping-list>
+    <div class="row" repeat.for="listId of lists">
+      <shopping-list list-id.bind="listId"></shopping-list>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-sm btn-primary" click.trigger="addList()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Add List
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" click.trigger="removeList()">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          Remove List
+        </button>
+      </div>
+    </div>
   </div>
 </template>

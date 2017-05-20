@@ -1,41 +1,42 @@
+import {bindable} from 'aurelia-framework';
 import {Item} from './item';
 
 export class ShoppingList {
-  listName = 'Shopping List';
-  name = '';
+  @bindable listId;
+  name = 'Shopping List';
+  itemName = '';
   items = [];
   isEditing = false;
 
   constructor() {
-    this.loadProperties();
+  }
+
+  attached() {
     this.loadItems();
+    this.loadProperties();
   }
 
   loadItems() {
-    let items = JSON.parse(localStorage.getItem('items'));
+    let items = JSON.parse(localStorage.getItem('items#' + this.listId));
     if (items) {
       this.items = items;
     }
   }
 
   loadProperties() {
-    let properties = JSON.parse(localStorage.getItem('properties'));
+    let properties = JSON.parse(localStorage.getItem('properties#' + this.listId));
+    console.log(properties);
     if (properties) {
-      this.listName = properties.listName;
+      this.name = properties.name;
     }
   }
 
   addItem(name) {
-    if (this.name) {
+    if (this.itemName) {
       this.items.push(new Item(name));
-      this.name = '';
+      this.itemName = '';
       this.saveItems();
     }
-  }
-
-  selectItem(item) {
-    this.selected = item;
-    item.selected = true;
   }
 
   saveItem(item) {
@@ -59,12 +60,13 @@ export class ShoppingList {
   }
 
   saveItems() {
-    localStorage.setItem('items', JSON.stringify(this.items));
+    localStorage.setItem('items#' + this.listId, JSON.stringify(this.items));
   }
 
   saveProperties() {
-    localStorage.setItem('properties', JSON.stringify({
-      'listName': this.listName
+    console.log(this.listId + ': ' + this.name);
+    localStorage.setItem('properties#' + this.listId, JSON.stringify({
+      'name': this.name
     }));
   }
 
