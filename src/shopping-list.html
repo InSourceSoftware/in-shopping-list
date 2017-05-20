@@ -1,7 +1,4 @@
 <template>
-  <div class="page-header">
-    <h1>${title}</h1>
-  </div>
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-9">
       <form id="shopping-list" class="form-inline well">
@@ -43,13 +40,13 @@
           </div>
           <div class="form-group new-form-item">
             <div class="input-group">
-              <span class="input-group-btn">
+              <span class="input-group-btn btn-add" show.bind="isEditing">
                 <button type="submit" class="btn btn-sm btn-primary" click.trigger="addItem(name)">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                 </button>
               </span>
               <label class="sr-only" for="name">Item</label>
-              <input type="text" id="name" class="form-control form-input" placeholder="Item Name" value.bind="name" />
+              <input type="text" id="name" class="form-control form-input" placeholder="Item Name" value.bind="name" autocomplete="off" />
             </div>
           </div>
         </fieldset>

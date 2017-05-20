@@ -1,17 +1,24 @@
 import {Item} from './item';
 
 export class ShoppingList {
-  listName = 'My Shopping List';
+  listName = 'Shopping List';
   name = '';
   items = [];
   isEditing = false;
 
   constructor() {
-    this.title = 'Shopping List';
+    this.loadProperties();
+    this.loadItems();
+  }
+
+  loadItems() {
     let items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       this.items = items;
     }
+  }
+
+  loadProperties() {
     let properties = JSON.parse(localStorage.getItem('properties'));
     if (properties) {
       this.listName = properties.listName;

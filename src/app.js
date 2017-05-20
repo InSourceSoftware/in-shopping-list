@@ -1,5 +1,5 @@
 export class App {
   constructor() {
-    this.title = 'Hello World!';
+    this.title = 'Shopping List';
   }
 }
