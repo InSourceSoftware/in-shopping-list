@@ -6,7 +6,6 @@ export class ShoppingList {
 
   constructor() {
     this.title = 'Shopping List';
-
     let items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       this.items = items;
@@ -17,13 +16,13 @@ export class ShoppingList {
     if (this.name) {
       this.items.push(new Item(name));
       this.name = '';
-
       this.saveItems();
     }
   }
 
-  saveItems() {
-    localStorage.setItem('items', JSON.stringify(this.items));
+  clearPurchased() {
+    this.items = this.items.filter(x => !x.purchased);
+    this.saveItems();
   }
 
   removeItem(item) {
@@ -31,9 +30,7 @@ export class ShoppingList {
     this.saveItems();
   }
 
-  clearPurchased() {
-    this.items = this.items.filter(x => !x.purchased);
-    console.log(this.items);
-    this.saveItems();
+  saveItems() {
+    localStorage.setItem('items', JSON.stringify(this.items));
   }
 }
