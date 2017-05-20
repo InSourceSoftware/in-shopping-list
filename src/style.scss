@@ -1,19 +1,38 @@
-ul {
-  list-style: none;
-  padding: 0;
-
-}
-
-label {
-  font-weight: normal;
-}
 input[type="checkbox"] {
   margin-right: 5px;
 }
 .btn-delete {
-  margin-right: 12px;
-  line-height: 14px;
+  margin-right: 5px;
+  .btn {
+    line-height: 14px;
+  }
 }
-.done {
+.purchased {
   text-decoration: line-through;
+}
+input.form-control {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.form-label {
+  font-weight: bold;
+}
+.form-item {
+  font-weight: normal;
+}
+.form-item-group {
+  margin-bottom: 0;
+}
+.new-form-item {
+  margin-bottom: 10px;
+
+  .input-group {
+    max-width: 250px;
+
+    input.form-control {
+      margin-left: 11px;
+      margin-bottom: 5px;
+    }
+  }
 }

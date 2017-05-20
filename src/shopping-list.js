@@ -1,14 +1,20 @@
 import {Item} from './item';
 
 export class ShoppingList {
+  listName = 'My Shopping List';
   name = '';
   items = [];
+  isEditing = false;
 
   constructor() {
     this.title = 'Shopping List';
     let items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       this.items = items;
+    }
+    let properties = JSON.parse(localStorage.getItem('properties'));
+    if (properties) {
+      this.listName = properties.listName;
     }
   }
 
@@ -18,6 +24,11 @@ export class ShoppingList {
       this.name = '';
       this.saveItems();
     }
+  }
+
+  clearAll() {
+    this.items = [];
+    this.saveItems();
   }
 
   clearPurchased() {
@@ -32,5 +43,19 @@ export class ShoppingList {
 
   saveItems() {
     localStorage.setItem('items', JSON.stringify(this.items));
+  }
+
+  saveProperties() {
+    localStorage.setItem('properties', JSON.stringify({
+      'listName': this.listName
+    }));
+  }
+
+  toggleEditing() {
+    this.isEditing = !this.isEditing;
+  }
+
+  get isPurchased() {
+    return this.items.find(x => x.purchased);
   }
 }
