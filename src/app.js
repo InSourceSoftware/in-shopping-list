@@ -11,8 +11,8 @@ export class App {
     let lists = JSON.parse(localStorage.getItem('lists'));
     if (lists) {
       this.lists = lists;
-      this.id = localStorage.getItem('listId');
     }
+    this.id = localStorage.getItem('listId');
   }
 
   addList() {

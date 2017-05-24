@@ -3,8 +3,8 @@ import {Item} from './item';
 
 export class ShoppingList {
   @bindable listId;
-  name = 'Shopping List';
-  itemName = '';
+  listName = 'Shopping List';
+  name = '';
   items = [];
   isEditing = false;
 
@@ -12,8 +12,15 @@ export class ShoppingList {
   }
 
   attached() {
-    this.loadItems();
     this.loadProperties();
+    this.loadItems();
+  }
+
+  loadProperties() {
+    let properties = JSON.parse(localStorage.getItem('properties#' + this.listId));
+    if (properties) {
+      this.listName = properties.name;
+    }
   }
 
   loadItems() {
@@ -23,34 +30,21 @@ export class ShoppingList {
     }
   }
 
-  loadProperties() {
-    let properties = JSON.parse(localStorage.getItem('properties#' + this.listId));
-    console.log(properties);
-    if (properties) {
-      this.name = properties.name;
-    }
-  }
-
   addItem(name) {
-    if (this.itemName) {
+    if (this.name) {
       this.items.push(new Item(name));
-      this.itemName = '';
+      this.name = '';
       this.saveItems();
     }
   }
 
-  saveItem(item) {
-    item.selected = false;
+  clearPurchased() {
+    this.items = this.items.filter(x => !x.purchased);
     this.saveItems();
   }
 
   clearAll() {
     this.items = [];
-    this.saveItems();
-  }
-
-  clearPurchased() {
-    this.items = this.items.filter(x => !x.purchased);
     this.saveItems();
   }
 
@@ -64,9 +58,8 @@ export class ShoppingList {
   }
 
   saveProperties() {
-    console.log(this.listId + ': ' + this.name);
     localStorage.setItem('properties#' + this.listId, JSON.stringify({
-      'name': this.name
+      'name': this.listName
     }));
   }
 

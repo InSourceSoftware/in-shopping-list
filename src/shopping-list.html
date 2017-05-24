@@ -1,54 +1,49 @@
 <template>
-  <div class="col-lg-4 col-md-6 col-sm-9">
-    <form id="shopping-list" class="form-inline well">
-      <fieldset>
-        <div class="from-group">
-          <label class="sr-only" for="name">List Name</label>
-          <input type="text" id="name" class="form-control form-input form-label" placeholder="List Name" value.bind="name" change.trigger="saveProperties()" />
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-9">
+      <form class="inline-form well">
+        <div class="form-group">
+          <label class="sr-only" for="listName">Name</label>
+          <input type="text" id="listName" class="form-control form-label" value.bind="listName" placeholder="Shopping List" blur.trigger="saveProperties()" />
         </div>
         <div class="form-group pull-right">
-          <label class="sr-only">
-            <input type="checkbox" checked.bind="isEditing" />
-          </label>
           <button type="button" class="btn btn-sm btn-${isEditing ? 'success' : 'default'}" click.trigger="toggleEditing()">
-            <span class="glyphicon glyphicon-${isEditing ? 'ok' : 'edit'}" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-${isEditing ? 'ok' : 'edit'}"></span>
             ${isEditing ? 'Done' : 'Edit'}
           </button>
         </div>
         <div class="form-group" show.bind="isEditing">
           <button type="button" class="btn btn-sm btn-danger" click.trigger="clearAll()">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear All
+            <span class="glyphicon glyphicon-remove"></span>
+            Clear All
           </button>
-          <button type="button" class="btn btn-sm btn-warning" show.bind="isPurchased" click.trigger="clearPurchased()">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear Purchased
+          <button type="button" class="btn btn-sm btn-warning" click.trigger="clearPurchased()" show.bind="isPurchased">
+            <span class="glyphicon glyphicon-remove"></span>
+            Clear Purchased
           </button>
         </div>
-        <div repeat.for="item of items">
-          <div class="form-group form-item-group">
-            <label class="form-item">
-              <span class="btn-delete" if.bind="isEditing">
-                <button type="button" class="btn btn-xs btn-danger" click.trigger="removeItem(item)">
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-              </span>
-              <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
-              <span class="${item.purchased ? 'purchased' : ''}" show.bind="!isEditing">${item.name}</span>
-              <input type="text" class="form-input ${item.purchased ? 'purchased' : ''}" placeholder="Item Name" value.bind="item.name" blur.trigger="saveItem(item)" if.bind="isEditing" />
-            </label>
-          </div>
+        <div class="form-group" repeat.for="item of items">
+          <button type="button" class="btn btn-xs btn-danger btn-delete" click.trigger="removeItem(item)" if.bind="isEditing">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          <label>
+            <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
+            <span class="${item.purchased ? 'purchased' : ''}" show.bind="!isEditing">${item.name}</span>
+            <input type="text" class="form-control form-item ${item.purchased ? 'purchased' : ''}" value.bind="item.name" placeholder="Name" if.bind="isEditing" blur.trigger="saveItems()" />
+          </label>
         </div>
-        <div class="form-group new-form-item">
+        <div class="form-group">
           <div class="input-group">
-            <span class="input-group-btn btn-add" show.bind="isEditing">
-              <button type="submit" class="btn btn-sm btn-primary" click.trigger="addItem(itemName)">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+            <div class="input-group-btn" show.bind="isEditing">
+              <button type="submit" class="btn btn-sm btn-primary" click.trigger="addItem(name)">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add
               </button>
-            </span>
-            <label class="sr-only" for="itemName">Item</label>
-            <input type="text" id="itemName" class="form-control form-input" placeholder="Item Name" value.bind="itemName" autocomplete="off" />
+            </div>
+            <input type="text" class="form-control new-form-item" value.bind="name" placeholder="New Item" />
           </div>
         </div>
-      </fieldset>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
