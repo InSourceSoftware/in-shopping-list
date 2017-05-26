@@ -10,7 +10,9 @@
   "scripts": {
     "start": "au run --watch",
     "test": "au test --env dev --watch",
-    "build": "au build --env dev"
+    "build": "au build --env dev",
+    "dist": "au build --env prod && rm -rf dist && mkdir dist && cp index.html dist && cp -r scripts dist && rm dist/scripts/app-bundle.js.map && cp -r images dist",
+    "upload": "rm -rf docs && mv dist docs && git add docs && git commit -m 'Upload dist' && git push origin master"
   },
   "dependencies": {
     "aurelia-animator-css": "^1.0.1",

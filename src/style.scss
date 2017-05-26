@@ -1,33 +1,56 @@
-label {
-  font-weight: normal;
-}
-input[type="checkbox"] {
-  margin-right: 5px;
-}
-.btn-delete {
-  margin-right: 5px;
-  line-height: 12px;
-}
-.purchased {
-  text-decoration: line-through;
+/** Page styles. */
+
+.main {
+  margin-bottom: 10px;
 }
 
-.form-group {
-  margin: 0 0 3px;
-  padding: 0;
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+
+  p {
+    margin: 20px 0;
+
+    .rounded-corners {
+      border-radius: 3px;
+    }
+  }
 }
-.form-control {
-  background: none;
-  border: 0;
-  margin: 0 5px 0;
-  padding: 0;
-}
-.form-item {
-  line-height: 16px;
-  height: 16px;
-  display: inline;
-  width: inherit;
-}
-.form-label {
-  font-weight: bold;
+
+/** Component styles. */
+
+.shopping-list {
+  label {
+    font-weight: normal;
+  }
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  .btn-delete {
+    margin-right: 5px;
+    line-height: 12px;
+  }
+  .purchased {
+    text-decoration: line-through;
+  }
+
+  .form-group {
+    margin: 0 0 3px;
+    padding: 0;
+  }
+  .form-control {
+    background: none;
+    border: 0;
+    margin: 0 5px 0;
+    padding: 0;
+  }
+  .form-item {
+    line-height: 16px;
+    height: 16px;
+    display: inline;
+    width: inherit;
+  }
+  .form-label {
+    font-weight: bold;
+  }
 }
