@@ -1,0 +1,19 @@
+<!--
+  Usage:
+
+  <site-footer type="static|fixed">
+    footer text <img alt="Logo" src="..." />
+  </site-footer>
+-->
+<template bindable="type">
+  <require from="./site-footer.css"></require>
+
+  <div if.bind="type == 'fixed'" class="navbar-fixed-spacer"></div>
+  <nav class="navbar navbar-default navbar-${type}-bottom site-footer">
+    <div class="container-fluid">
+      <p class="text-center text-muted">
+        <slot></slot>
+      </p>
+    </div>
+  </nav>
+</template>

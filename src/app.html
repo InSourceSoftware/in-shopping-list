@@ -1,11 +1,10 @@
 <template>
   <require from="style.css"></require>
   <require from="shopping-list"></require>
-  <require from="bottom-nav.html"></require>
 
   <div class="main container-fluid">
     <div class="page-header">
-      <h1>${title}</h1>
+      <h1>${title} <a class="github-banner" href="https://github.com/InSourceSoftware/in-shopping-list"></a></h1>
     </div>
     <div repeat.for="listId of lists">
       <shopping-list list-id.bind="listId"></shopping-list>
@@ -21,5 +20,9 @@
       </button>
     </div>
   </div>
-  <bottom-nav></bottom-nav>
+  <site-footer type="fixed">
+    Copyright &copy; 2017 <a href="http://insource.io" title="InSource Software">InSource</a>
+    &middot;
+    Created by <a href="http://insource.io" title="InSource Software"><img src="images/in_square_orange.png" /></a>
+  </site-footer>
 </template>
