@@ -1,48 +1,58 @@
 <template>
   <div class="row shopping-list">
     <div class="col-lg-4 col-md-6 col-sm-9">
-      <form class="inline-form well">
-        <div class="form-group">
-          <label class="sr-only" for="listName">Name</label>
-          <input type="text" id="listName" class="form-control form-label" value.bind="listName" placeholder="Shopping List" blur.trigger="saveProperties()" />
-        </div>
-        <div class="form-group pull-right">
-          <button type="button" class="btn btn-sm btn-${isEditing ? 'success' : 'default'}" click.trigger="toggleEditing()">
-            <span class="glyphicon glyphicon-${isEditing ? 'ok' : 'edit'}"></span>
-            ${isEditing ? 'Done' : 'Edit'}
-          </button>
-        </div>
-        <div class="form-group" show.bind="isEditing">
-          <button type="button" class="btn btn-sm btn-danger" click.trigger="clearAll()">
-            <span class="glyphicon glyphicon-remove"></span>
-            Clear All
-          </button>
-          <button type="button" class="btn btn-sm btn-warning" click.trigger="clearPurchased()" show.bind="isPurchased">
-            <span class="glyphicon glyphicon-remove"></span>
-            Clear Purchased
-          </button>
-        </div>
-        <div class="form-group" repeat.for="item of items">
-          <button type="button" class="btn btn-xs btn-danger btn-delete" click.trigger="removeItem(item)" if.bind="isEditing">
-            <span class="glyphicon glyphicon-remove"></span>
-          </button>
-          <label>
-            <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
-            <span class="${item.purchased ? 'purchased' : ''}" show.bind="!isEditing">${item.name}</span>
-            <input type="text" class="form-control form-item ${item.purchased ? 'purchased' : ''}" value.bind="item.name" placeholder="Name" if.bind="isEditing" blur.trigger="saveItems()" />
-          </label>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-btn" show.bind="isEditing">
-              <button type="submit" class="btn btn-sm btn-primary" click.trigger="addItem(name)">
-                <span class="glyphicon glyphicon-plus"></span>
-                Add
-              </button>
-            </div>
-            <input type="text" class="form-control new-form-item" value.bind="name" placeholder="New Item" />
+      <form id="shopping-list" class="well" submit.trigger="addItem(name)">
+        <fieldset>
+          <div class="form-group">
+            <label class="sr-only" for="listName">List Name</label>
+            <input type="text" id="listName" class="form-control form-input form-label" placeholder="List Name" value.bind="listName" blur.trigger="saveProperties()" />
           </div>
-        </div>
+          <div class="form-group pull-right">
+            <label class="sr-only">
+              <input type="checkbox" checked.bind="isEditing" />
+            </label>
+            <button type="button" class="btn btn-xs btn-round-xl btn-${isEditing ? 'success' : 'default'}" click.trigger="toggleEditing()">
+              <span class="glyphicon glyphicon-${isEditing ? 'ok' : 'edit'}" aria-hidden="true"></span>
+              ${isEditing ? 'Done' : 'Edit'}
+            </button>
+          </div>
+          <div class="form-group" show.bind="isEditing">
+            <button type="button" class="btn btn-xs btn-danger btn-round-xl" click.trigger="clearAll()">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear All
+            </button>
+            <button type="button" class="btn btn-xs btn-warning btn-round-xl" show.bind="isPurchased" click.trigger="clearPurchased()">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear Purchased
+            </button>
+          </div>
+          <div>
+            <div class="form-group" repeat.for="item of items">
+              <span class="btn-delete" if.bind="isEditing">
+                <button type="button" class="btn btn-xs btn-danger btn-round-xl" click.trigger="removeItem(item)">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+              </span>
+              <span class="checkbox">
+                <label class="form-item">
+                  <input type="checkbox" checked.bind="item.purchased" change.trigger="saveItems()" />
+                  <span class="checkbox-field"></span>
+                  <span class="${item.purchased ? 'purchased' : ''}" show.bind="!isEditing">${item.name}</span>
+                </label>
+                <input type="text" class="form-control form-item ${item.purchased ? 'purchased' : ''}" placeholder="Item Name" value.bind="item.name" blur.trigger="saveItem(item)" if.bind="isEditing" />
+              </span>
+            </div>
+          </div>
+          <div class="form-group pull-left">
+            <div class="input-group">
+              <span class="input-group-btn btn-add">
+                <button type="submit" class="btn btn-xs btn-primary btn-round-xl">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                </button>
+              </span>
+              <label class="sr-only" for="name">Item</label>
+              <input type="text" id="name" class="form-control form-input" placeholder="Item Name" value.bind="name" autocomplete="off" />
+            </div>
+          </div>
+        </fieldset>
       </form>
     </div>
   </div>
